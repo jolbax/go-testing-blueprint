@@ -1,0 +1,12 @@
+.idea
+*.iml
+!/build/
+/coverage.out
+!/configs/
+/configs/application-secure.yml
+/configs/con-ssp-backend.yml
+/build/*.exe
+/build/bin/
+/openshift/secrets/
+mocks
+gpg

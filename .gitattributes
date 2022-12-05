@@ -1,0 +1,2 @@
+# Auto-detect which files are text and set line-ending-style to LF, as gofmt sets it, even on windows
+* text=auto eol=lf
