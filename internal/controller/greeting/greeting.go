@@ -6,9 +6,9 @@ type Greeting struct {
 }
 
 func (g Greeting) GetGreeting(name string) model.Greeting {
-	return model.Greeting{"de", "Hallo " + name}
+	return model.Greeting{Language: "de", Text: "Hallo " + name}
 }
 
 func (g Greeting) PostGreeting(greeting model.Greeting) model.Greeting {
-	return model.Greeting{greeting.Language, "You posted a greeting: " + greeting.Text}
+	return model.Greeting{Language: greeting.Language, Text: "You posted a greeting: " + greeting.Text}
 }
