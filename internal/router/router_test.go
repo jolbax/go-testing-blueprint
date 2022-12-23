@@ -1,9 +1,10 @@
-package router
+package router_test
 
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
+	. "go-testing-blueprint/internal/router"
 	"go-testing-blueprint/mocks"
 	"testing"
 )
