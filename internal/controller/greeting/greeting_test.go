@@ -1,31 +1,40 @@
-package greeting
+package greeting_test
 
 import (
-	"github.com/stretchr/testify/assert"
+	. "github.com/onsi/ginkgo/v2"
+	. "github.com/onsi/gomega"
+	"go-testing-blueprint/internal/controller/greeting"
 	"go-testing-blueprint/internal/model"
 	"testing"
 )
 
-func TestGreeting_GetGreeting(t *testing.T) {
-	g := Greeting{}
-	assert.Equal(t, model.Greeting{Text: "Hallo Samba", Language: "de"}, g.GetGreeting("Samba"), "Greet")
-	assert.Equal(t, model.Greeting{Text: "Hallo ", Language: "de"}, g.GetGreeting(""), "empty Greet")
-	assert.NotEqual(t, "Hallo Samba", g.GetGreeting("Samba"), "expecting String")
+func TestGreeting(t *testing.T) {
+	RegisterFailHandler(Fail)
+	RunSpecs(t, "Greeting Suite")
 }
 
-func TestGreeting_PostGreeting(t *testing.T) {
-	g := Greeting{}
-	assert.Equal(t,
-		model.Greeting{Text: "You posted a greeting: Hello Samba", Language: "en"},
-		g.PostGreeting(model.Greeting{Text: "Hello Samba", Language: "en"}),
-		"Greet")
-	assert.Equal(t,
-		model.Greeting{Text: "You posted a greeting: ", Language: ""},
-		g.PostGreeting(model.Greeting{}),
-		"empty Greet")
-	assert.NotEqual(t,
-		"You posted a greeting: Hello Samba",
-		g.PostGreeting(model.Greeting{Text: "Hello Samba", Language: "en"}),
-		"expecting String")
+var g = greeting.Greeting{}
+var _ = Describe("./Internal/Controller/Greeting", func() {
+	Context("GetGreeting", func() {
+		It("should get a greeting", func() {
+			Expect(g.GetGreeting("Samba")).
+				To(Equal(model.Greeting{Text: "Hallo Samba", Language: "de"}))
+		})
+		It("should get an empty greeting", func() {
+			Expect(g.GetGreeting("")).
+				To(Equal(model.Greeting{Text: "Hallo ", Language: "de"}))
+		})
+	})
 
-}
+	Context("PostGretting", func() {
+		It("should post a greeting", func() {
+			Expect(g.PostGreeting(model.Greeting{Text: "Hello Samba", Language: "en"})).
+				To(Equal(model.Greeting{Text: "You posted a greeting: Hello Samba", Language: "en"}))
+		})
+		It("should post an empty greeting", func() {
+			Expect(g.PostGreeting(model.Greeting{Text: "", Language: "en"})).
+				To(Equal(model.Greeting{Text: "You posted a greeting: ", Language: "en"}))
+		})
+	})
+
+})
